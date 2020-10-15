@@ -9,4 +9,4 @@ for ti = 1:1000
     end
 end
 
-plot3(pos1(:, 1), pos1(:, 2), pos1(:, 3), 'k.-')
+plot3(bodies(1).pos(:, 1), bodies(1).pos(:, 2), bodies(1).pos(:, 3), 'k.-')

@@ -11,18 +11,17 @@ classdef Body < handle
         G = 6.67408*10^(-11);
     end
     methods
-        function obj = Body(lineStyle, r, v, a, m)
+        function obj = Body(lineStyle, r, v, m)
             arguments
                 lineStyle = 'k.-';
                 r (1, :) {mustBeNumeric} = rand(3, 1)'*10^8
-                v (1, :) {mustBeNumeric} = [0; 0; 0]'';
-                a (1, :) {mustBeNumeric} = [0; 0; 0]'';
+                v (1, :) {mustBeNumeric} = [0; 0; 0];
                 m {mustBeNumeric} = rand(1)*10^24;
             end
 
             obj.r = r;
             obj.v = v;
-            obj.a = a;
+            obj.a = [0;0;0];
             obj.m = m;
             obj.lineStyle = lineStyle
         end

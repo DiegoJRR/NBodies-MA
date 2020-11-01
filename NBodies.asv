@@ -1,0 +1,41 @@
+% Defines a new system with a given G value, and a list of bodies
+system = System(6.67408*10^(-11));
+
+% Data collected from: https://ssd.jpl.nasa.gov/horizons.cgi#results
+Mj = 1898.13*10^24; % Mass of Jupyter
+Ms = 1.989*10^30; % Mass of Sun
+rs = [0; 0; 0];
+
+% Positions of jupyter with respect to sun in [m] @ 1/11/2020 2:25 pm
+rj = [3.987115520646092E+08; -6.533832063869169E+08; -6.206784291675091E+06]*10^3;
+vj = [1.100944861615655E+01; 7.430254320173791E+00; -2.770895672340354E-01]*10^3;
+
+system.bodies = [Body('k.-', rs, [0;0;0], [0;0;0], ), Body('b.-'), Body('r.-'), Body('g.-'), Body('c.-')];
+
+%% Sol,Jupiter, Asteroide  1.98*10^30  1.898*10^27 8*10^20
+%% system.bodies = [Body('k.-',[0; 5; 7],[0;0;0],[0;0;0],1.98*10^30), Body('b.-',[50; 198; 20],[0;0;0],[0;0;0],1.898*10^27), Body('r.-',[0; 10; 10],[0;0;0],[0;0;0],8*10^20)];
+
+%% Sol, jupiter, luna  7.34*10^22
+%% system.bodies = [Body('k.-', [0; 5; 7], [0;0;0], [0;0;0], 1.98*10^30), Body('b.-',[50; 198; 20],[0;0;0],[0;0;0],1.898*10^27), Body('r.-',[0; 10; 10],[0;0;0],[0;0;0],7.34*10^22)];
+
+%% 3 planetas, igual masa, en triangulo equilatero  5.94*10^24 masa tierra
+%% system.bodies = [Body('k.-',[50; 0; 0],[0;0;0],[0;0;0],5.94*10^24), Body('b.-',[-50; 0; 0],[0;0;0],[0;0;0],5.94*10^24), Body('r.-',[0; 50; 0],[0;0;0],[0;0;0],5.94*10^24)];
+
+
+% system.bodies = [Body('k.-'), Body('b.-'), Body('r.-'), Body('g.-'), Body('c.-')];
+
+dt = 10;
+N = 1000;
+
+energyLog = NaN * ones(N,1);
+
+for ti = 1:N
+    % Calculates and updates the bodies coordinates
+    system.updateBodies(dt)
+    
+    % Calculates and logs the mechanical energy of the system
+    energyLog(ti) = system.calculateEnergy();
+end
+
+%plot(t', energyLog)
+disp("Energy conserved: " + energyLog(end)*100/energyLog(1) + "%")

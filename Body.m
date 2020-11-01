@@ -23,11 +23,15 @@ classdef Body < handle
             obj.v = v;
             obj.a = [0;0;0];
             obj.m = m;
-            obj.lineStyle = lineStyle
+            obj.lineStyle = lineStyle;
         end
         
         function plotPosition(obj)
             plot3(obj.r(:,1), obj.r(:,2), obj.r(:,3), obj.lineStyle);
+        end
+        
+        function energy = kineticEnergy(obj)
+           energy = 0.5*norm(obj.v)^2*obj.m; 
         end
         
         function obj = updateBody(obj, body2, body3, dt, ti)
@@ -45,10 +49,6 @@ classdef Body < handle
            
            obj.v = obj.v + obj.a*dt;
            obj.r = obj.r + obj.v*dt;
-        end
-        
-        function energy = kineticEnergy(obj)
-           energy = 0.5*norm(obj.v)^2*obj.m; 
         end
     end
 end

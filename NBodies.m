@@ -41,14 +41,14 @@ vme = [-5.559700117912301E+01; 1.419569860178160E+01; 1.334611086431540E+01]*10^
 % system.bodies = [Body('k.-', rs, vs, Ms), Body('b.-', rj, vj, Mj), Body('c.-', re, ve, Me)];
 
 %% Sistema de 3 cuerpos en triangulo equilatero
-system = System(1);
-M = 1000;
-system.bodies = [Body('k.-', [1000; 0; 0], [0; 1; 0]*10, M), Body('b.-', [-500; sqrt(3)*500; 0], [sqrt(3)/2 ; -1/2; 0]*10, M), Body('c.-', [-500; -sqrt(3)*500; 0], [sqrt(3)/2; -1/2; 0]*10, M)];
+% system = System(1);
+% M = 100;
+% system.bodies = [Body('k.-', [1000; 0; 0], [0; 1; 0]*(1/sqrt(30)), M), Body('b.-', [-500; sqrt(3)*500; 0], [-sqrt(3)/2 ; -1/2; 0]*(1/sqrt(30)), M), Body('c.-', [-500; -sqrt(3)*500; 0], [sqrt(3)/2; -1/2; 0]*(1/sqrt(30)), M)];
 
 
 %% Inicio de simulación
-dt = 60*60*24; % Con deltas de un dia 
-N = 100;
+dt = 1; % Con deltas de un dia 
+N = 1000;
 
 % energyLog = NaN * ones(N,1);
 Ei = system.calculateEnergy();
@@ -56,7 +56,7 @@ Ef = Ei;
 
 for ti = 1:N
     % Calcula y actualiza las coordenadas de los cuerpos
-    system.updateBodies(dt, 0.01)
+    system.updateBodies(dt, 0.05)
     
     % Calcula y registra la energía mecánica del sistema
     %energyLog(ti) = system.calculateEnergy();

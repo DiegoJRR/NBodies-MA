@@ -42,7 +42,7 @@ classdef System < handle
                 obj.bodies(bodyIDX).v = obj.bodies(bodyIDX).v + obj.bodies(bodyIDX).a*dt;
                 obj.bodies(bodyIDX).r = obj.bodies(bodyIDX).r + obj.bodies(bodyIDX).v*dt;
 
-
+                
                 % Plotting
                 hold on
                 obj.bodies(bodyIDX).plotPosition()

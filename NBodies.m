@@ -35,15 +35,20 @@ rme = [1.556075127245677E+07; 3.888915173485027E+07; 1.916142169417799E+07]*10^3
 vme = [-5.559700117912301E+01; 1.419569860178160E+01; 1.334611086431540E+01]*10^3;
 
 %% Define un nuevo sistema, dado un valor de G
-system = System(6.67408*10^(-11));
+% system = System(6.67408*10^(-11));
 
 %% Caso: Sol, Jupiter, Europa (JII)
-system.bodies = [Body('k.-', rs, vs, Ms), Body('b.-', rj, vj, Mj), Body('c.-', re, ve, Me)];
+% system.bodies = [Body('k.-', rs, vs, Ms), Body('b.-', rj, vj, Mj), Body('c.-', re, ve, Me)];
+
+%% Sistema de 3 cuerpos en triangulo equilatero
+system = System(1);
+M = 1000;
+system.bodies = [Body('k.-', [1000; 0; 0], [0; 1; 0]*10, M), Body('b.-', [-500; sqrt(3)*500; 0], [sqrt(3)/2 ; -1/2; 0]*10, M), Body('c.-', [-500; -sqrt(3)*500; 0], [sqrt(3)/2; -1/2; 0]*10, M)];
 
 
 %% Inicio de simulación
-dt = 60*60*24; % Con deltas de un minuto 
-N = 500;
+dt = 60*60*24; % Con deltas de un dia 
+N = 100;
 
 % energyLog = NaN * ones(N,1);
 Ei = system.calculateEnergy();

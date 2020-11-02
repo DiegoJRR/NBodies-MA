@@ -34,25 +34,32 @@ Mme = 3.302*10^23;
 rme = [1.556075127245677E+07; 3.888915173485027E+07; 1.916142169417799E+07]*10^3;
 vme = [-5.559700117912301E+01; 1.419569860178160E+01; 1.334611086431540E+01]*10^3;
 
-%% Define un nuevo sistema, dado un valor de G
-% system = System(6.67408*10^(-11));
 
 %% Caso: Sol, Jupiter, Europa (JII)
-% system.bodies = [Body('k.-', rs, vs, Ms), Body('b.-', rj, vj, Mj), Body('c.-', re, ve, Me)];
+system = System(6.67408*10^(-11));
+system.bodies = [Body('k.-', rs, vs, Ms), Body('b.-', rj, vj, Mj), Body('c.-', re, ve, Me)];
+dt = 60*60*12;  
+N = 300;
 
-%% Sistema de 3 cuerpos en triangulo equilatero
-% system = System(1);
-% M = 100;
-% system.bodies = [Body('k.-', [1000; 0; 0], [0; 1; 0]*(1/sqrt(30)), M), Body('b.-', [-500; sqrt(3)*500; 0], [-sqrt(3)/2 ; -1/2; 0]*(1/sqrt(30)), M), Body('c.-', [-500; -sqrt(3)*500; 0], [sqrt(3)/2; -1/2; 0]*(1/sqrt(30)), M)];
+%% Caso: Sol, Jupiter, 624 Hektor
+%system = System(6.67408*10^(-11));
+%system.bodies = [Body('k.-', rs, vs, Ms), Body('b.-', rj, vj, Mj), Body('c.-', rh, vh, Mh)];
+%dt = 60*60*24*30;
+%N = 150;
 
+%% Caso: Sistema de 3 cuerpos en triangulo equilatero
+%system = System(1);
+%M = 2550;
+%system.bodies = [Body('k.-', [1000; 0; 1]*1.5, [0.00005; 1.005; 0], M), Body('b.-', [-500; sqrt(3)*500; 1]*1.5, [-0.87 ; -0.51; 0], M), Body('c.-', [-500; -sqrt(3)*500; 1]*1.5, [0.889 ; -0.491; 0], M)];
+%dt = 40;
+%N = 100;
 
 %% Inicio de simulación
-dt = 1; % Con deltas de un dia 
-N = 1000;
-
 % energyLog = NaN * ones(N,1);
 Ei = system.calculateEnergy();
 Ef = Ei;
+
+pause(1)
 
 for ti = 1:N
     % Calcula y actualiza las coordenadas de los cuerpos
